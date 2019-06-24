@@ -14,6 +14,12 @@
 
 `Multicodecs` is the ruby implementation of [multiformats/multicodec][spec].
 
+> 🙌🏽 This is called `multicodecs` instead of the singular form, to stay
+> consistent with the `multihashes` gem, which was _forced_ to take a different
+> name has `multihash` was already taken, which is also the case for `multibase`
+> and others. In the future, this might be renamed to `multiformats-codec`, with
+> a backwards-compatible interface.
+
 ## Installation
 
 Add this line to your application's Gemfile:
