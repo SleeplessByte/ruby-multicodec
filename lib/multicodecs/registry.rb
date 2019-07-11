@@ -1,8 +1,16 @@
 # frozen_string_literal: true
 
 module Multicodecs
+  class AutoHashCollection < Hash
+    def [](key)
+      self[key] = [] unless key?(key)
+      super
+    end
+  end
+
   # rubocop:disable Style/MutableConstant
   REGISTRATIONS = {}
+  REGISTRATIONS_PER_TAG = AutoHashCollection.new
   # rubocop:enable Style/MutableConstant
 
   Registration = Struct.new(:code, :name, :tag) do
@@ -29,11 +37,10 @@ module Multicodecs
   end
 
   def register(code:, name:, tag:)
-    Multicodecs::REGISTRATIONS[name] = Registration.new(
-      code,
-      name,
-      tag
-    )
+    Registration.new(code, name, tag).tap do |registration|
+      Multicodecs::REGISTRATIONS[name] = registration
+      Multicodecs::REGISTRATIONS_PER_TAG[tag] << registration
+    end
   end
 
   def fetch_by!(code: nil, name: nil)
@@ -56,5 +63,23 @@ module Multicodecs
 
   def names
     Multicodecs::REGISTRATIONS.keys
+  end
+
+  def tags
+    Multicodecs::REGISTRATIONS_PER_TAG.keys
+  end
+
+  def where(tag:)
+    Multicodecs::REGISTRATIONS_PER_TAG[tag]
+  end
+
+  def each(tag: nil)
+    arr = tag.nil? ? Multicodecs::REGISTRATIONS.values : Multicodecs.where(tag: tag)
+
+    if block_given?
+      return arr.each { |registration| yield registration }
+    end
+
+    arr.each
   end
 end

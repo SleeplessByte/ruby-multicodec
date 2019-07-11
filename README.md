@@ -85,6 +85,7 @@ Convenience methods exist:
 ## Related
 
 - [`multiformats/multicodec`][git-multicodec]: the spec repository
+- [`multiformats/ruby-multiaddr`][git-ruby-multiaddr]: the ruby implementation of [`multiformats/multiaddr`][git-multiaddr]
 - [`multiformats/ruby-multibase`][git-ruby-multibase]: the ruby implementation of [`multiformats/multibase`][git-multibase]
 - [`multiformats/ruby-multihash`][git-ruby-multihash]: the ruby implementation of [`multiformats/multihash`][git-multihash]
 
@@ -122,13 +123,14 @@ The gem is available as open source under the terms of the [MIT License][web-mit
 
 ## Code of Conduct
 
-Everyone interacting in the Shrine::ConfigurableStorage project’s codebases,
-issue trackers, chat rooms and mailing lists is expected to follow the
-[code of conduct][git-self-coc].
+Everyone interacting in this project’s codebases, issue trackers, chat rooms and
+mailing lists is expected to follow the [code of conduct][git-self-coc].
 
 [spec]: https://github.com/multiformats/multicodec
 [git-self-coc]: https://github.com/SleeplessByte/ruby-multibase/blob/master/CODE_OF_CONDUCT.md
 [git-self]: https://github.com/SleeplessByte/ruby-multibase
+[git-ruby-multiaddr]: https://github.com/SleeplessByte/ruby-multiaddr
+[git-multiaddr]: https://github.com/multiformats/multiaddr
 [git-ruby-multicodec]: https://github.com/SleeplessByte/ruby-multicodec
 [git-multicodec-table]: https://github.com/multiformats/multicodec/blob/master/multicodec.csv
 [git-multicodec]:  https://github.com/multiformats/multicodec
