@@ -1,5 +1,8 @@
 name,                           tag,            code,           description
 identity,                       multihash,      0x00,           raw binary
+cidv1,                          ipld,           0x01,           CIDv1
+cidv2,                          ipld,           0x02,           CIDv2
+cidv3,                          ipld,           0x03,           CIDv3
 ip4,                            multiaddr,      0x04,
 tcp,                            multiaddr,      0x06,
 sha1,                           multihash,      0x11,
@@ -15,6 +18,7 @@ keccak-224,                     multihash,      0x1a,           keccak has varia
 keccak-256,                     multihash,      0x1b,
 keccak-384,                     multihash,      0x1c,
 keccak-512,                     multihash,      0x1d,
+blake3,                         multihash,      0x1e,           BLAKE3 has a default 32 byte output length. The maximum length is (2^64)-1 bytes.
 dccp,                           multiaddr,      0x21,
 murmur3-128,                    multihash,      0x22,
 murmur3-32,                     multihash,      0x23,
@@ -45,6 +49,8 @@ leofcoin-block,                 ipld,           0x81,           Leofcoin Block
 leofcoin-tx,                    ipld,           0x82,           Leofcoin Transaction
 leofcoin-pr,                    ipld,           0x83,           Leofcoin Peer Reputation
 sctp,                           multiaddr,      0x84,
+dag-jose,                       ipld,           0x85,           MerkleDAG JOSE
+dag-cose,                       ipld,           0x86,           MerkleDAG COSE
 eth-block,                      ipld,           0x90,           Ethereum Block (RLP)
 eth-block-list,                 ipld,           0x91,           Ethereum Block List (RLP)
 eth-tx-trie,                    ipld,           0x92,           Ethereum Transaction Trie (Eth-Trie)
@@ -56,8 +62,10 @@ eth-account-snapshot,           ipld,           0x97,           Ethereum Account
 eth-storage-trie,               ipld,           0x98,           Ethereum Contract Storage Trie (Eth-Secure-Trie)
 bitcoin-block,                  ipld,           0xb0,           Bitcoin Block
 bitcoin-tx,                     ipld,           0xb1,           Bitcoin Tx
+bitcoin-witness-commitment,     ipld,           0xb2,           Bitcoin Witness Commitment
 zcash-block,                    ipld,           0xc0,           Zcash Block
 zcash-tx,                       ipld,           0xc1,           Zcash Tx
+docid,                          namespace,      0xce,           Ceramic Document Id
 stellar-block,                  ipld,           0xd0,           Stellar Block
 stellar-tx,                     ipld,           0xd1,           Stellar Tx
 md4,                            multihash,      0xd4,
@@ -68,7 +76,14 @@ decred-tx,                      ipld,           0xe1,           Decred Tx
 ipld-ns,                        namespace,      0xe2,           IPLD path
 ipfs-ns,                        namespace,      0xe3,           IPFS path
 swarm-ns,                       namespace,      0xe4,           Swarm path
+ipns-ns,                        namespace,      0xe5,           IPNS path
+zeronet,                        namespace,      0xe6,           ZeroNet site address
+secp256k1-pub,                  key,            0xe7,           Secp256k1 public key
+bls12_381-g1-pub,               key,            0xea,           BLS12-381 public key in the G1 field
+bls12_381-g2-pub,               key,            0xeb,           BLS12-381 public key in the G2 field
+x25519-pub,                     key,            0xec,           Curve25519 public key
 ed25519-pub,                    key,            0xed,           Ed25519 public key
+bls12_381-g1g2-pub,             key,            0xee,           BLS12-381 concatenated public keys in both the G1 and G2 fields
 dash-block,                     ipld,           0xf0,           Dash Block
 dash-tx,                        ipld,           0xf1,           Dash Tx
 swarm-manifest,                 ipld,           0xfa,           Swarm Manifest
@@ -89,12 +104,29 @@ onion,                          multiaddr,      0x01bc,
 onion3,                         multiaddr,      0x01bd,
 garlic64,                       multiaddr,      0x01be,         I2P base64 (raw public key)
 garlic32,                       multiaddr,      0x01bf,         I2P base32 (hashed public key or encoded public key/checksum+optional secret)
+tls,                            multiaddr,      0x01c0,
 quic,                           multiaddr,      0x01cc,
 ws,                             multiaddr,      0x01dd,
 wss,                            multiaddr,      0x01de,
 p2p-websocket-star,             multiaddr,      0x01df,
 http,                           multiaddr,      0x01e0,
+json,                           serialization,  0x0200,         JSON (UTF-8-encoded)
+messagepack,                    serialization,  0x0201,         MessagePack
+libp2p-peer-record,             libp2p,         0x0301,         libp2p peer record type
+sha2-256-trunc254-padded,       multihash,      0x1012,         SHA2-256 with the two most significant bits from the last byte zeroed (as via a mask with 0b00111111) - used for proving trees as in Filecoin
+ripemd-128,                     multihash,      0x1052,
+ripemd-160,                     multihash,      0x1053,
+ripemd-256,                     multihash,      0x1054,
+ripemd-320,                     multihash,      0x1055,
 x11,                            multihash,      0x1100,
+p256-pub,                       key,            0x1200,         P-256 public Key
+p384-pub,                       key,            0x1201,         P-384 public Key
+p521-pub,                       key,            0x1202,         P-521 public Key
+ed448-pub,                      key,            0x1203,         Ed448 public Key
+x448-pub,                       key,            0x1204,         X448 public Key
+ed25519-priv,                   key,            0x1300,         Ed25519 private key
+kangarootwelve,                 multihash,      0x1d01,         KangarooTwelve is an extendable-output hash function based on Keccak-p
+sm3-256,                        multihash,      0x534d,
 blake2b-8,                      multihash,      0xb201,         Blake2b consists of 64 output lengths that give different hashes
 blake2b-16,                     multihash,      0xb202,
 blake2b-24,                     multihash,      0xb203,
@@ -415,6 +447,11 @@ skein1024-1000,                 multihash,      0xb3dd,
 skein1024-1008,                 multihash,      0xb3de,
 skein1024-1016,                 multihash,      0xb3df,
 skein1024-1024,                 multihash,      0xb3e0,
+poseidon-bls12_381-a2-fc1,      multihash,      0xb401,         Poseidon using BLS12-381 and arity of 2 with Filecoin parameters
+poseidon-bls12_381-a2-fc1-sc,   multihash,      0xb402,         Poseidon using BLS12-381 and arity of 2 with Filecoin parameters - high-security variant
+zeroxcert-imprint-256,          zeroxcert,      0xce11,         0xcert Asset Imprint (root hash)
+fil-commitment-unsealed,        filecoin,       0xf101,         Filecoin piece or sector data commitment merkle node/root (CommP & CommD)
+fil-commitment-sealed,          filecoin,       0xf102,         Filecoin sector data commitment merkle node/root - sealed and replicated (CommR)
 holochain-adr-v0,               holochain,      0x807124,       Holochain v0 address    + 8 R-S (63 x Base-32)
 holochain-adr-v1,               holochain,      0x817124,       Holochain v1 address    + 8 R-S (63 x Base-32)
 holochain-key-v0,               holochain,      0x947124,       Holochain v0 public key + 8 R-S (63 x Base-32)
