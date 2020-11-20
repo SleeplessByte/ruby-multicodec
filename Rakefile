@@ -13,7 +13,7 @@ Rake::Task.define_task(:update) do |t|
   SOURCE_FILE = 'https://raw.githubusercontent.com/multiformats/multicodec/master/table.csv'
 
   File.open(File.join(__dir__, 'lib', 'table.csv'), 'wb') do |saved_file|
-    open(SOURCE_FILE, 'rb') do |read_file|
+    URI.open(SOURCE_FILE, 'rb') do |read_file|
       saved_file.write(read_file.read)
     end
   end
