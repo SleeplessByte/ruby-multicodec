@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.0
+
+- Update multicodec table
+- Implement `status` and `description`
+- Remove `Struct` usage
+
 ## 0.2.1
 
 - Fix deprecation warning in update rake task ([#3][pr-3])
