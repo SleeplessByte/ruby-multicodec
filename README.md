@@ -141,5 +141,3 @@ mailing lists is expected to follow the [code of conduct][git-self-coc].
 [web-coc]: http://contributor-covenant.org
 [web-mit]: https://opensource.org/licenses/MIT
 [web-rubygems]: https://rubygems.org
-
-
