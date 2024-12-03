@@ -1,6 +1,5 @@
 # Multicodecs
 
-[![Build Status](https://travis-ci.com/SleeplessByte/ruby-multicodec.svg?branch=master)][shield-link-travis]
 [![Gem Version](https://badge.fury.io/rb/multicodecs.svg)][shield-link-gem]
 [![MIT license](https://img.shields.io/badge/license-MIT-brightgreen.svg)][shield-link-license]
 [![Maintainability](https://api.codeclimate.com/v1/badges/e5b0e892f0c098edd78c/maintainability)][shield-link-codeclimate]
