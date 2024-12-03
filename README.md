@@ -58,20 +58,20 @@ also allows you to bring your own values.
 require 'multicodecs'
 
 Multicodecs['identity']
-# => #<struct Multicodecs::Registration code=0, name="identity", tag="multihash">
+# => 0x0 identity (multihash/permanent): raw binary
 
 Multicodecs[0x12]
-# => #<struct Multicodecs::Registration code=18, name="sha2-256", tag="multihash">
+# => 0x12 sha2-256 (multihash/permanent): (no description)
 
 Multicodecs.find_by(name: 'protobuf')
-# => #<struct Multicodecs::Registration code=80, name="protobuf", tag="serialization">
+# => 0x50 protobuf (serialization/draft): Protocol Buffers
 ```
 
 You can `register` your own values
 
 ```ruby
-Multicodecs.register(code: 0x12345, name: 'xxx', tag: 'vendor')
-# => #<struct Multicodecs::Registration code=74565, name="xxx", tag="vendor">
+Multicodecs.register(code: 0x12345, name: 'xxx', tag: 'vendor', status: 'draft', description: nil)
+# => 0x12345 xxx (vendor/draft): (no description)
 ```
 
 Convenience methods exist:
